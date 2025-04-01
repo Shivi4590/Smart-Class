@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React from 'react'
 // import GreetingCardProfessorProfessor from '../components/GreetingCardProfessorProfessor'
 // import OverviewGraph from '../components/OverviewGraph'
@@ -201,6 +202,8 @@
 
 // export default ProfessorDashboard
 
+=======
+>>>>>>> af0fcc9 (changes done)
 "use client"
 
 import React, { useState, useEffect } from 'react'
@@ -210,17 +213,28 @@ import GreetingCardProfessor from '../components/GreetingCardProfessor'
 import Calender from '../components/Calender'
 import AnnouncementSectionProfessor from '../components/AnnouncementSectionProfessor'
 import HomeworkSectionProfessor from '../components/HomeworkSectionProfessor'
+<<<<<<< HEAD
+=======
+import styles from '../styles/dashboard.module.css'
+>>>>>>> af0fcc9 (changes done)
 
 interface Announcement {
   id: number;
   title: string;
   content: string;
   date: string;
+<<<<<<< HEAD
+=======
+  class_id: number;
+>>>>>>> af0fcc9 (changes done)
   class_name: string;
   file_name: string | null;
   file_link: string | null;
   visibility: number;
+<<<<<<< HEAD
   class_id: number;
+=======
+>>>>>>> af0fcc9 (changes done)
   professor_id: string;
 }
 
@@ -244,18 +258,27 @@ function ProfessorDashboard() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+<<<<<<< HEAD
     // Check if user is authenticated
+=======
+>>>>>>> af0fcc9 (changes done)
     const token = localStorage.getItem('token');
     if (!token) {
       router.push('/login');
       return;
     }
 
+<<<<<<< HEAD
     // Fetch data for the dashboard
     const fetchDashboardData = async () => {
       setLoading(true);
       try {
         // Fetch announcements
+=======
+    const fetchDashboardData = async () => {
+      setLoading(true);
+      try {
+>>>>>>> af0fcc9 (changes done)
         const announcementsResponse = await axios.get(
           'http://localhost:8080/api/v1/professor/announcements',
           {
@@ -266,7 +289,10 @@ function ProfessorDashboard() {
           }
         );
 
+<<<<<<< HEAD
         // Fetch homework assignments
+=======
+>>>>>>> af0fcc9 (changes done)
         const homeworkResponse = await axios.get(
           'http://localhost:8080/api/v1/professor/homework',
           {
@@ -298,6 +324,7 @@ function ProfessorDashboard() {
   }, [router]);
 
   return (
+<<<<<<< HEAD
     <div className="flex flex-col w-full p-2 min-h-screen overflow-auto">
       <div className="flex flex-col lg:flex-row relative z-10 gap-4">
         <div className="w-full lg:w-8/12">
@@ -318,19 +345,50 @@ function ProfessorDashboard() {
               <button 
                 onClick={() => window.location.reload()} 
                 className="mt-2 text-sm bg-red-100 hover:bg-red-200 text-red-700 py-1 px-3 rounded"
+=======
+    <div className={styles.dashboardContainer}>
+      <div className={styles.dashboardContent}>
+        <div className={styles.mainContent}>
+          <GreetingCardProfessor />
+          
+          {loading ? (
+            <div className={styles.loadingContainer}>
+              <div className={styles.loadingCard}>
+                <div className={styles.loadingSpinner}></div>
+              </div>
+              <div className={styles.loadingCard}>
+                <div className={styles.loadingSpinner}></div>
+              </div>
+            </div>
+          ) : error ? (
+            <div className={styles.errorContainer}>
+              <p className={styles.errorMessage}>{error}</p>
+              <button 
+                onClick={() => window.location.reload()} 
+                className={styles.retryButton}
+>>>>>>> af0fcc9 (changes done)
               >
                 Retry
               </button>
             </div>
           ) : (
+<<<<<<< HEAD
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 m-2 mt-6">
               <AnnouncementSectionProfessor />
+=======
+            <div className={styles.loadingContainer}>
+              <AnnouncementSectionProfessor announcements={announcements} />
+>>>>>>> af0fcc9 (changes done)
               <HomeworkSectionProfessor />
             </div>
           )}
         </div>
         
+<<<<<<< HEAD
         <div className="w-full lg:w-4/12">
+=======
+        <div className={styles.sidebar}>
+>>>>>>> af0fcc9 (changes done)
           <Calender />
         </div>
       </div>
@@ -338,4 +396,8 @@ function ProfessorDashboard() {
   )
 }
 
+<<<<<<< HEAD
 export default ProfessorDashboard
+=======
+export default ProfessorDashboard
+>>>>>>> af0fcc9 (changes done)

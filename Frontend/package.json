@@ -3,10 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+<<<<<<< HEAD
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
+=======
+    "dev": "next dev",
+    "dev:clean": "npm run clean && next dev",
+    "clean": "rimraf .next && rimraf node_modules/.cache",
+    "build": "next build",
+    "start": "next start"
+>>>>>>> af0fcc9 (changes done)
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",

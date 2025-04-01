@@ -1,5 +1,8 @@
 "use client";
+<<<<<<< HEAD
 import { useRouter } from "next/navigation";
+=======
+>>>>>>> af0fcc9 (changes done)
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import GreetingCard from "../components/GreetingCard";
@@ -8,6 +11,7 @@ import Calender from "../components/Calender";
 import AnnouncementSection from "../components/AnnouncementSection";
 import HomeworkSection from "../components/HomeworkSection";
 
+<<<<<<< HEAD
 interface Announcement {
   title: string;
   date: string;
@@ -72,6 +76,78 @@ function StudentDashboard() {
 
   useEffect(() => {
     const fetchAnnouncements = async () => {
+=======
+// Define proper interfaces for your data types
+interface Announcement {
+  id: number;
+  title: string;
+  content: string;
+  date: string;
+  isImportant: boolean;
+}
+
+interface Homework {
+  id: number;
+  title: string;
+  description: string;
+  dueDate: string;
+  status: 'Completed' | 'Pending' | 'Overdue';
+  subject: string;
+  isCompleted: boolean;
+}
+
+interface LoadingState {
+  announcements: boolean;
+  homeworks: boolean;
+}
+
+interface ErrorState {
+  announcements: string | null;
+  homeworks: string | null;
+}
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1';
+
+const StudentDashboard = () => {
+  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+  const [homeworks, setHomeworks] = useState<Homework[]>([]);
+  const [loading, setLoading] = useState<LoadingState>({
+    announcements: false,
+    homeworks: false
+  });
+  const [error, setError] = useState<ErrorState>({
+    announcements: null,
+    homeworks: null
+  });
+
+  const fallbackAnnouncements: Announcement[] = [
+    {
+      id: 1,
+      title: "Welcome to the New Semester",
+      content: "We hope you're ready for an exciting new semester!",
+      date: "2024-03-01",
+      isImportant: true
+    },
+    // Add more fallback announcements if needed
+  ];
+
+  const fallbackHomeworks: Homework[] = [
+    {
+      id: 1,
+      title: "Mathematics Assignment",
+      description: "Complete exercises from Chapter 3",
+      dueDate: "2024-03-15",
+      status: "Pending",
+      subject: "Mathematics",
+      isCompleted: false
+    },
+    // Add more fallback homework if needed
+  ];
+
+  useEffect(() => {
+    const fetchAnnouncements = async () => {
+      setLoading(prev => ({ ...prev, announcements: true }));
+>>>>>>> af0fcc9 (changes done)
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(`${API_URL}/student/announcement`, {
@@ -84,6 +160,7 @@ function StudentDashboard() {
         if (response.data.success) {
           // Transform API response to match our component's expected format
           const formattedAnnouncements = response.data.data.map(
+<<<<<<< HEAD
             (announcement: AnnouncementResponse) => ({
               title: announcement.title,
               date: new Date(announcement.created_at).toLocaleDateString(),
@@ -92,6 +169,18 @@ function StudentDashboard() {
             })
           );
           setAnnouncements(formattedAnnouncements);
+=======
+            (announcement: Announcement) => ({
+              id: announcement.id,
+              title: announcement.title,
+              content: announcement.content,
+              date: announcement.date,
+              isImportant: announcement.isImportant,
+            })
+          );
+          setAnnouncements(formattedAnnouncements);
+          setError(prev => ({ ...prev, announcements: null }));
+>>>>>>> af0fcc9 (changes done)
         } else {
           setError((prev) => ({
             ...prev,
@@ -109,8 +198,13 @@ function StudentDashboard() {
       }
     };
 
+<<<<<<< HEAD
     // Then update the fetchHomeworks function
     const fetchHomeworks = async () => {
+=======
+    const fetchHomeworks = async () => {
+      setLoading(prev => ({ ...prev, homeworks: true }));
+>>>>>>> af0fcc9 (changes done)
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(`${API_URL}/student/homework`, {
@@ -122,6 +216,7 @@ function StudentDashboard() {
 
         if (response.data.success) {
           // Transform API response to match our component's expected format
+<<<<<<< HEAD
           console.log(response.data.data);
           const formattedHomeworks = response.data.data.map(
             (homework: HomeworkResponse) => {
@@ -151,6 +246,21 @@ function StudentDashboard() {
             }
           );
           setHomeworks(formattedHomeworks);
+=======
+          const formattedHomeworks = response.data.data.map(
+            (homework: Homework) => ({
+              id: homework.id,
+              title: homework.title,
+              description: homework.description,
+              dueDate: homework.dueDate,
+              status: homework.status,
+              subject: homework.subject,
+              isCompleted: homework.isCompleted,
+            })
+          );
+          setHomeworks(formattedHomeworks);
+          setError(prev => ({ ...prev, homeworks: null }));
+>>>>>>> af0fcc9 (changes done)
         } else {
           setError((prev) => ({
             ...prev,
@@ -170,6 +280,7 @@ function StudentDashboard() {
 
     fetchAnnouncements();
     fetchHomeworks();
+<<<<<<< HEAD
   }, []);
 
   // Rest of your component remains the same
@@ -218,6 +329,9 @@ function StudentDashboard() {
       isCompleted: false,
     },
   ];
+=======
+  }, [API_URL]);
+>>>>>>> af0fcc9 (changes done)
 
   return (
     <div className="flex-1 bg-gradient-to-b from-purple-100 via-white to-white p-1 md:p-2 lg:p-4 overflow-auto">
@@ -226,6 +340,7 @@ function StudentDashboard() {
           <GreetingCard name="Student" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
             <AnnouncementSection
+<<<<<<< HEAD
               announcements={
                 announcements.length > 0 ? announcements : fallbackAnnouncements
               }
@@ -233,6 +348,12 @@ function StudentDashboard() {
               error={error.announcements}
             />
 
+=======
+              announcements={announcements.length > 0 ? announcements : fallbackAnnouncements}
+              loading={loading.announcements}
+              error={error.announcements}
+            />
+>>>>>>> af0fcc9 (changes done)
             <HomeworkSection
               homeworks={homeworks.length > 0 ? homeworks : fallbackHomeworks}
               loading={loading.homeworks}
@@ -253,4 +374,8 @@ function StudentDashboard() {
   );
 }
 
+<<<<<<< HEAD
 export default StudentDashboard;
+=======
+export default StudentDashboard;
+>>>>>>> af0fcc9 (changes done)

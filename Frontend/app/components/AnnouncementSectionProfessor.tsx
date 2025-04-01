@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React from 'react';
 // import Link from 'next/link';
 // import { Calendar, Book, ChevronRight, Bell } from 'lucide-react';
@@ -116,6 +117,14 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 import { Bell, ChevronRight, FileText } from 'lucide-react';
+=======
+"use client"
+
+import React from 'react';
+import Link from 'next/link';
+import { ChevronRight, Bell } from 'lucide-react';
+import AnnouncementCard from './AnnouncementCard';
+>>>>>>> af0fcc9 (changes done)
 
 interface Announcement {
   id: number;
@@ -130,6 +139,7 @@ interface Announcement {
   professor_id: string;
 }
 
+<<<<<<< HEAD
 const AnnouncementSectionProfessor: React.FC = () => {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [loading, setLoading] = useState(true);
@@ -164,15 +174,27 @@ const AnnouncementSectionProfessor: React.FC = () => {
   };
 
   // Format date to a more readable format
+=======
+interface AnnouncementSectionProps {
+  announcements: Announcement[];
+}
+
+const AnnouncementSectionProfessor: React.FC<AnnouncementSectionProps> = ({ announcements }) => {
+>>>>>>> af0fcc9 (changes done)
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
+<<<<<<< HEAD
       month: 'short',
+=======
+      month: 'long',
+>>>>>>> af0fcc9 (changes done)
       day: 'numeric'
     });
   };
 
+<<<<<<< HEAD
   // Check if announcement is important
   const isAnnouncementImportant = (announcement: Announcement): boolean => {
     return announcement.title.toLowerCase().includes('important') || 
@@ -264,6 +286,40 @@ const AnnouncementSectionProfessor: React.FC = () => {
           )}
         </div>
       )}
+=======
+  const isAnnouncementImportant = (announcement: Announcement): boolean => {
+    return announcement.visibility === 1;
+  };
+
+  const truncateContent = (content: string, maxLength: number = 100): string => {
+    if (content.length <= maxLength) return content;
+    return content.substring(0, maxLength) + '...';
+  };
+
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-sm h-full flex flex-col">
+      <div className="flex justify-between items-center mb-4">
+        <div className="flex items-center">
+          <Bell size={20} className="text-purple-600 mr-2" />
+          <h2 className="text-xl font-semibold text-purple-600">Announcements</h2>
+        </div>
+        <Link href="/announcements" className="text-purple-600 text-sm font-medium flex items-center hover:text-purple-800">
+          View All <ChevronRight size={16} />
+        </Link>
+      </div>
+      
+      <div className="max-h-[70vh] overflow-y-auto pr-2">
+        {announcements.map((announcement) => (
+          <AnnouncementCard
+            key={announcement.id}
+            title={announcement.title}
+            date={formatDate(announcement.date)}
+            content={truncateContent(announcement.content)}
+            isImportant={isAnnouncementImportant(announcement)}
+          />
+        ))}
+      </div>
+>>>>>>> af0fcc9 (changes done)
     </div>
   );
 };

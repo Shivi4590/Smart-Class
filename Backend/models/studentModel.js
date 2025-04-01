@@ -165,7 +165,11 @@ class StudentModel {
                 accessToken: jwt.sign(
                     { id: student.id },
                     process.env.ACCESS_TOKEN_SECRET,
+<<<<<<< HEAD
                     { expiresIn: '1m' }
+=======
+                    { expiresIn: '15m' }
+>>>>>>> af0fcc9 (changes done)
                 ),
                 refreshToken: jwt.sign(
                     { id: student.id },
@@ -209,7 +213,11 @@ class StudentModel {
             const accessToken = jwt.sign(
                 { id: decoded.id },
                 process.env.ACCESS_TOKEN_SECRET,
+<<<<<<< HEAD
                 { expiresIn: '2m' }
+=======
+                { expiresIn: '15m' }
+>>>>>>> af0fcc9 (changes done)
             );
 
             console.log('[StudentModel] Access token generated successfully');
