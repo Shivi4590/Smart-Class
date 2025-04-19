@@ -159,7 +159,7 @@ async getClassAttendanceBySubject(classId, subject) {
                     "Class" c ON tt.class_id = c.id
                 WHERE 
                     tt.professor_id = $1 AND
-                    LOWER(tt.day_of_the_week) = LOWER($2) AND
+                    LOWER(tt.day_of_the_week::text) = LOWER($2) AND
                     NOT EXISTS (
                         SELECT 1 FROM "class_cancelled" cc
                         WHERE cc.time_table_id = tt.id AND cc.date = $3

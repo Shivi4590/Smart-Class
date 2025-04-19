@@ -58,7 +58,7 @@ class AttendanceModel {
                 SELECT 
                   t.subject,
                   COUNT(*) AS total_classes,
-                  COUNT(CASE WHEN lower(a.status) = 'present' THEN 1 END) AS present_count
+                  COUNT(CASE WHEN lower(a.status::text) = 'present' THEN 1 END) AS present_count
                 FROM 
                   "Attendance" a
                 INNER JOIN 

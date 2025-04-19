@@ -30,7 +30,7 @@ class AnnouncementModel {
                 SELECT a.*, p.first_name, p.last_name 
                 FROM "announcements" a
                 JOIN "Professor" p ON a.professor_id = p.id
-                WHERE a.class_id = $1 
+                WHERE a.id = $1 
                 ORDER BY a.date DESC`;
                 
             const result = await client.query(query, [classId]);
@@ -64,7 +64,7 @@ class AnnouncementModel {
         try {
             const query = `
                 INSERT INTO "announcements" 
-                (class_id, visibility, title, content, file_name, file_link, professor_id, date)
+                (id, visibility, title, content, file_name, file_link, professor_id, date)
                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
                 RETURNING *`;
                 
@@ -113,9 +113,8 @@ class AnnouncementModel {
             const query = `
                 SELECT a.*, c.name as class_name
                 FROM "announcements" a
-                JOIN "Class" c ON a.class_id = c.id
-                WHERE a.professor_id = $1
-                ORDER BY a.date DESC`;
+                JOIN "Class" c ON a.id = c.id
+                WHERE a.id = $1`;
                 
             const result = await client.query(query, [professorId]);
             

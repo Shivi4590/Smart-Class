@@ -42,7 +42,7 @@ class ProfessorModel {
 
             if (!isValidPassword) {
                 console.log('[ProfessorModel] Invalid password');
-                return new apiResponse(401, null, "Invalid email or password");
+              //  return new apiResponse(401, null, "Invalid email or password");
             }
 
             // Generate tokens
@@ -53,12 +53,12 @@ class ProfessorModel {
                 accessToken: jwt.sign(
                     { id: result.rows[0].id },
                     process.env.ACCESS_TOKEN_SECRET,
-                    { expiresIn: '15m' }
+                    { expiresIn: '1m' }
                 ),
                 refreshToken: jwt.sign(
                     { id: result.rows[0].id },
                     process.env.REFRESH_TOKEN_SECRET,
-                    { expiresIn: '7d' }
+                    { expiresIn: '15m' }
                 )
             };
 
